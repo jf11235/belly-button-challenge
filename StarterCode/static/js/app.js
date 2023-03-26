@@ -54,9 +54,10 @@ d3.json(url).then(function(data) {
         panel.append("h6").text(`${key.toUpperCase()}: ${value}`);
         }
     );
+// setup the dropdown menu to display the sample names
+d3.selectAll("#selDataset").on("change", getData);
 
-    // Display each key-value pair from the metadata JSON object somewhere on the page.
-    
+
 
 });
 
