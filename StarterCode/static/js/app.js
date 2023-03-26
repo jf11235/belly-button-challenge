@@ -46,13 +46,7 @@ d3.json(url).then(function(data) {
   let chartData2 = [trace2];
   Plotly.newPlot("bubble", chartData2, layout);
 
-    
-
-
-
-});
-
-// Display the sample metadata, i.e., an individual's demographic information.
+    // Display the sample metadata, i.e., an individual's demographic information.
 let metadata = data.metadata[0];
 let panel = d3.select("#sample-metadata");
 panel.html("");
@@ -74,3 +68,8 @@ Object.entries(metadata).forEach(([key, value]) => {
     }
 );
 }
+
+
+
+});
+
