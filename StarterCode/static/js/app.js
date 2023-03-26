@@ -46,18 +46,31 @@ d3.json(url).then(function(data) {
   let chartData2 = [trace2];
   Plotly.newPlot("bubble", chartData2, layout);
 
-    // Display the sample metadata, i.e., an individual's demographic information.
-    let metadata = data.metadata[0];
-    let panel = d3.select("#sample-metadata");
-    panel.html("");
-    Object.entries(metadata).forEach(([key, value]) => {
-        panel.append("h6").text(`${key.toUpperCase()}: ${value}`);
-        }
-    );
-// setup the dropdown menu to display the sample names
-d3.selectAll("#selDataset").on("change", getData);
+    
 
 
 
 });
 
+// Display the sample metadata, i.e., an individual's demographic information.
+let metadata = data.metadata[0];
+let panel = d3.select("#sample-metadata");
+panel.html("");
+Object.entries(metadata).forEach(([key, value]) => {
+    panel.append("h6").text(`${key.toUpperCase()}: ${value}`);
+    }
+);
+// setup the dropdown menu to display the sample names
+d3.selectAll("#selDataset").on("change", getData);
+
+function getData() {
+let dropdownMenu = d3.select("#selDataset");
+let dataset = dropdownMenu.property("value");   
+let metadata = data.metadata[0];
+let panel = d3.select("#sample-metadata");
+panel.html("");
+Object.entries(metadata).forEach(([key, value]) => {
+    panel.append("h5").text(`${key.toUpperCase()}: ${value}`);
+    }
+);
+}
