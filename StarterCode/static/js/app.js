@@ -57,14 +57,14 @@ Object.entries(metadata).forEach(([key, value]) => {
 // setup the dropdown menu to display the sample names
 d3.selectAll("#selDataset").on("change", getData);
 
-function getData() {
+function getData(data) {
 let dropdownMenu = d3.select("#selDataset");
 let dataset = dropdownMenu.property("value");   
 let metadata = data.metadata[0];
 let panel = d3.select("#sample-metadata");
 panel.html("");
 Object.entries(metadata).forEach(([key, value]) => {
-    panel.append("h5").text(`${key.toUpperCase()}: ${value}`);
+    panel.append("h6").text(`${key.toUpperCase()}: ${value}`);
     }
 );
 }
