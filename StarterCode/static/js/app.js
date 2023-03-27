@@ -31,7 +31,8 @@ function optionChanged(currentSample) {
 //initialze the panael with the first sample
 let metadata = data.metadata[0];
 let sample = data.samples[0]
-//let wfreq = data.metadata.wfreq[0]
+//let wfreq = data.metadata.wfreq
+
 chartsAll(sample)
 let panel = d3.select("#sample-metadata");
 panel.html("");
@@ -102,10 +103,9 @@ select.addEventListener("change", optionChanged);
 
     
     }
+  //creating a function for gauge plot
+function gaugePlot(wfreq) {
 
-function gaugePlot (wfreq) {
-
-        //creating a gauge plot
         var data1 = [
             {
                 domain: { x: [0, 1], y: [0, 1] },
