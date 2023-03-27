@@ -31,9 +31,13 @@ function optionChanged(currentSample) {
 //initialze the panael with the first sample
 let metadata = data.metadata[0];
 let sample = data.samples[0]
-//let wfreq = data.metadata.wfreq
+let wfreq = metadata.wfreq
+
+//calling the functions to initialize the plots and panels with the data from the first objects in the lists
 
 chartsAll(sample)
+gaugePlot(wfreq)
+console.log(metadata)
 let panel = d3.select("#sample-metadata");
 panel.html("");
 Object.entries(metadata).forEach(([key, value]) => {
@@ -126,9 +130,6 @@ function gaugePlot(wfreq) {
             font: { color: "darkblue", family: "Arial" }
         };
         Plotly.newPlot('gauge', data1, layout1);
-
-
-
 
     }
     
