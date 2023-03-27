@@ -6,6 +6,8 @@ d3.json(url).then(function(data) {
   let otu_ids = data.samples[0].otu_ids;
   let otu_labels = data.samples[0].otu_labels;
 
+
+  // creating the bar chart
   let trace1 = {
     x: sample_values.slice(0,10).reverse(),
     y: otu_ids.slice(0,10).map(otuID => `OTU ${otuID}`).reverse(),
@@ -15,12 +17,7 @@ d3.json(url).then(function(data) {
     orientation: "h"
   };
 
-  // Create a bubble chart that displays each sample.
-  // Use otu_ids for the x values.
-  // Use sample_values for the y values.
-  // Use sample_values for the marker size.
-  // Use otu_ids for the marker colors.
-  // Use otu_labels for the text values.
+// creating the bubble chart
 
   let trace2 = {
     x: sample_values,
@@ -47,13 +44,10 @@ d3.json(url).then(function(data) {
   Plotly.newPlot("bubble", chartData2, layout);
 
     // Display the sample metadata, i.e., an individual's demographic information.
-let metadata = data.metadata[0];
-let panel = d3.select("#sample-metadata");
-panel.html("");
-Object.entries(metadata).forEach(([key, value]) => {
-    panel.append("h6").text(`${key.toUpperCase()}: ${value}`);
-    }
-);
+
+    //change the metadata panel to display the individual's demographic information
+
+
 // setup the dropdown menu to display the sample names
 let selector = d3.select("#selDataset");
 data.names.forEach((sample) => {
@@ -63,23 +57,35 @@ data.names.forEach((sample) => {
     .property("value", sample);
 });
 
+//update the individual's demographic information when a new sample is selected in the dropdown menu
 
-// d3.selectAll("#selDataset").on("change", getData);
+//initialze the panael with the first sample
+let metadata = data.metadata[0];
+let panel = d3.select("#sample-metadata");
+panel.html("");
+Object.entries(metadata).forEach(([key, value]) => {
+    panel.append("h6").text(`${key.toUpperCase()}: ${value}`);
+    }
+);
 
-// function getData(data) {
-// let dropdownMenu = d3.select("#selDataset");
-// let dataset = dropdownMenu.property("value");   
-// let metadata = data.metadata[0];
-// let panel = d3.select("#sample-metadata");
-// panel.html("");
-// Object.entries(metadata).forEach(([key, value]) => {
-//     panel.append("h6").text(`${key.toUpperCase()}: ${value}`);
-//     }
-// );
-// }
+//create a function to update the panel with the new sample when a new sample is selected in the dropdown menu
+function optionChanged(e) {
 
+    let newSample = Number(e.target.value)
+    let metadata = data.metadata.find(d => d.id === newSample);
+    let panel = d3.select("#sample-metadata");
+    panel.html("");
+    if (metadata){
+        console.log(Object.entries(metadata))
+        Object.entries(metadata).forEach(([key, value]) => {
+            panel.append("h6").text(`${key.toUpperCase()}: ${value}`);
+                }
+            )
+        }
+    }   
 
-//dropdown menu is not working
+const select = document.getElementById("selDataset");
+select.addEventListener("change", optionChanged);
 
 });
 
