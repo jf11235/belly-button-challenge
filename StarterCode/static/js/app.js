@@ -9,7 +9,7 @@ function optionChanged(currentSample) {
     let newSample = Number(currentSample.target.value)
     let metadata = data.metadata.find(d => d.id === newSample)
     let sample = data.samples.find(d => d.id == newSample)
-    let wfreq = metadata.wfreq;
+    let wfreq = metadata.wfreq
     let panel = d3.select("#sample-metadata");
     panel.html("");
     if (metadata){
