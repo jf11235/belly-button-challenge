@@ -21,6 +21,7 @@ function optionChanged(currentSample) {
         }
         console.log(sample)
         chartsAll(sample)
+        gaugePlot(wfreq)
     };
 
    
